@@ -11,7 +11,6 @@ log = require('./libs/log')(module);
 
 app = express(); // создается приложение
 
-
 // view engine setup
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug'); // pug - система шаблонизации
