@@ -9,13 +9,13 @@
     "config": "^3.0.1",
     "connect": "^3.6.6",
     "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
+    "debug": "^4.1.1",
     "errorhandler": "^1.5.0",
     "express": "~4.16.0",
-    "http-errors": "~1.6.2",
+    "http-errors": "^1.7.1",
     "morgan": "~1.9.0",
     "nconf": "^0.10.0",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.3",
     "winston": "^3.1.0"
   }
 }

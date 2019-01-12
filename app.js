@@ -70,7 +70,7 @@ app.use(function (req, res) { // обработчик
 
 app.use(function (err, req, res, next) { // length - кол-во арг функции; 4 - обработчик ош error handler
   res.locals.message = err.message;
-  console.log(res.locals.message);
+  log.info(res.locals.message);
   res.locals.error = req.app.get('env') === 'development' ? err : {}; // true : false
   res.status(err.status || 500);
   res.render('error');
