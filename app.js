@@ -11,15 +11,28 @@ log = require('./libs/log')(module);
 
 app = express(); // создается приложение
 
-/*
+
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-app.use(logger('dev'));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'pug'); // pug - система шаблонизации
+app.use(logger('dev')); // выводит запись о том, что за запрос пришел, dev - формат логгирования
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser()); // внутри - ключ
+
+app.get('/', function (req, res, next) {
+    res.render("index", {
+        body: 'Hello'
+    });
+});
+/*extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+*/
+
+app.use(express.static(__dirname + '/public'));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -28,17 +41,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-*/
-
+/*
 app.use(function (req, res, next) { // Middleware
   if (req.url =='/') {
     res.end("Hello");
@@ -46,16 +49,14 @@ app.use(function (req, res, next) { // Middleware
     next(); // передать управление следующему Middleware
   }
 });
-
 app.use(function (req, res, next) {
   if (req.url =='/forbidden') {
-    next(new Error("wops, denied")); // передать ош дальше по цепочке - по ум. выводит стек
+    next(createError("wops, denied")); // передать ош дальше по цепочке - по ум. выводит стек
     log.info(Error);
   } else {
     next();
   }
 });
-
 app.use(function (req, res, next) {
   if (req.url =='/test') {
     res.end("Test");
@@ -67,7 +68,7 @@ app.use(function (req, res, next) {
 app.use(function (req, res) { // обработчик
   res.send(404, "Page Not Found Sorry"); // замыкает цепочку
 });
-
+*/
 app.use(function (err, req, res, next) { // length - кол-во арг функции; 4 - обработчик ош error handler
   res.locals.message = err.message;
   log.info(res.locals.message);
