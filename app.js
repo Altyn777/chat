@@ -12,16 +12,17 @@ log = require('./libs/log')(module);
 app = express(); // создается приложение
 
 // view engine setup
+app.engine('ejs', require('ejs-locals'));
 app.set('views', __dirname + '/views');
-app.set('view engine', 'pug'); // pug - система шаблонизации
+app.set('view engine', 'ejs'); // 2 парам - система шаблонизации
 app.use(logger('dev')); // выводит запись о том, что за запрос пришел, dev - формат логгирования
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); // внутри - ключ
 
 app.get('/', function (req, res, next) {
-    res.render("index", {
-        body: 'Hello'
+    res.render("index.ejs", {
+     //   body: '<b>Hello</b>'
     });
 });
 /*extends layout
