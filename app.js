@@ -1,11 +1,11 @@
-createError = require('http-errors');
-express = require('express');
-path = require('path');
-cookieParser = require('cookie-parser');
-logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-indexRouter = require('./routes/index');
-usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
 log = require('./libs/log')(module);
 
@@ -19,11 +19,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); // внутри - ключ
 
+/*
 app.get('/', function (req, res, next) {
     res.render("index", {
         body: 'Hello'
     });
-});
+}); */
 /*extends layout
 
 block content
