@@ -1,8 +1,5 @@
-doctype html
-html
-   head
-     title Привет, мир!
-   body
-     section.container
-       h1 Привет, мир!
-<!--      p #{body} -->
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
