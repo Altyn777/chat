@@ -37,7 +37,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next)=>{
   next(createError(404));
 });
 
@@ -69,7 +69,7 @@ app.use(function (req, res) { // обработчик
   res.send(404, "Page Not Found Sorry"); // замыкает цепочку
 });
 */
-app.use(function (err, req, res, next) { // length - кол-во арг функции; 4 - обработчик ош error handler
+app.use((err, req, res, next) => { // length - кол-во арг функции; 4 - обработчик ош error handler
   res.locals.message = err.message;
   log.info(res.locals.message);
   res.locals.error = req.app.get('env') === 'development' ? err : {}; // true : false

@@ -1,21 +1,29 @@
-const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
+/*const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/chat', {useNewUrlParser: true});
 
-// Connection URL
-const url = 'mongodb://localhost:27017/chat';
+schema = mongoose.Schema({
+    name: String
+});
+schema.methods.meow = () => {
+    console.log(this.get('name'));
+};
 
-// Database Name
-const dbName = 'myproject';
+const Cat = mongoose.model('Cat', schema);
 
-// Create a new MongoClient
-const client = new MongoClient(url, {useNewUrlParser: true});
+const kitty = new Cat({ name: 'Zildjian' });
+kitty.save().then(() => kitty.meow()); // сохр в бд
+*/
+const User = require('./models/user').User;
 
-// Use connect method to connect to the Server
-client.connect(function(err) {
-    assert.equal(null, err);
-    console.log("Connected successfully to server");
+const user = new User({
+    username: "Tester",
+    password: "secret"
+});
 
-    const db = client.db(dbName);
+user.save((err, user, affected) => {
+    if (err) throw err;
 
-    client.close();
+    User.findOne({username: "Tester"}, (err, tester) => {
+        console.log(tester);
+    })
 });
