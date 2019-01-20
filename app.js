@@ -21,14 +21,26 @@ app.use(cookieParser()); // внутри - ключ
 
 
 app.get('/', function (req, res, next) {
-    res.render("index");
+  res.render('index', { title: 'Express' });
 });
-/*extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
-*/
+User = require('./models/user').User;
+app.get('/users', function (req, res, next) {
+  User.find({}, function (err, users) {
+    if (err) return next(err);
+    res.json(users);
+  });
+});
+
+app.get('/user/:id', function (req, res, next) {
+  User.findById(req.params.id, function (err, user) {
+    if (err) return next(err);
+    if (!user) {
+      next(createError(404, "User Not Found"));
+    }
+    res.json(user);
+  });
+});
 
 app.use(express.static(__dirname + '/public'));
 app.use('/', indexRouter);
