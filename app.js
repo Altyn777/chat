@@ -6,6 +6,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const userRouter = require('./routes/user');
 
 log = require('./libs/log')(module);
 
@@ -19,19 +20,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); // внутри - ключ
 
-
+/*
 app.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
-User = require('./models/user').User;
+*/
+// User = require('./models/user').User;
+/*
 app.get('/users', function (req, res, next) {
   User.find({}, function (err, users) {
     if (err) return next(err);
     res.json(users);
   });
 });
-
+*/
+/*
 app.get('/user/:id', function (req, res, next) {
   User.findById(req.params.id, function (err, user) {
     if (err) return next(err);
@@ -41,10 +44,11 @@ app.get('/user/:id', function (req, res, next) {
     res.json(user);
   });
 });
-
+*/
 app.use(express.static(__dirname + '/public'));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=>{
