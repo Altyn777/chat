@@ -19,12 +19,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); // внутри - ключ
 
-/*
+
 app.get('/', function (req, res, next) {
-    res.render("index", {
-        body: 'Hello'
-    });
-}); */
+    res.render("index");
+});
 /*extends layout
 
 block content
