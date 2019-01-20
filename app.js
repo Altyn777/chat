@@ -21,20 +21,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); // внутри - ключ
 
 /*
-app.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-*/
-// User = require('./models/user').User;
-/*
+User = require('./models/user').User;
 app.get('/users', function (req, res, next) {
   User.find({}, function (err, users) {
     if (err) return next(err);
     res.json(users);
   });
 });
-*/
-/*
+
 app.get('/user/:id', function (req, res, next) {
   User.findById(req.params.id, function (err, user) {
     if (err) return next(err);
@@ -51,7 +45,7 @@ app.use('/users', usersRouter);
 app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
-app.use((req, res, next)=>{
+app.use(function(req, res, next) {
   next(createError(404));
 });
 
@@ -78,12 +72,8 @@ app.use(function (req, res, next) {
     next();
   }
 });
-
-app.use(function (req, res) { // обработчик
-  res.send(404, "Page Not Found Sorry"); // замыкает цепочку
-});
 */
-app.use((err, req, res, next) => { // length - кол-во арг функции; 4 - обработчик ош error handler
+app.use(function(err, req, res, next) { // length - кол-во арг функции; 4 - обработчик ош error handler
   res.locals.message = err.message;
   log.info(res.locals.message);
   res.locals.error = req.app.get('env') === 'development' ? err : {}; // true : false
