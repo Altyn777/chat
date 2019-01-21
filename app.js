@@ -1,12 +1,17 @@
 const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
+path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const userRouter = require('./routes/user');
+
+const session = require('express-session');
+MongoStore = require('connect-mongo')(session);
+mongoose = require('./libs/mongoose');
+mongoose_store = new MongoStore({mongooseConnection: mongoose.connection});
 
 log = require('./libs/log')(module);
 
@@ -19,6 +24,20 @@ app.use(logger('dev')); // выводит запись о том, что за з
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); // внутри - ключ
+
+app.use(session({
+  secret: "KillerIsJim", // обязат парам - для подпис куки
+  key: config.get('session:key'),
+  cookie: config.get('session:cookie'),
+  saveUninitialized: false,
+  resave: false,
+  store: mongoose_store
+}));
+
+app.use(function (req, res, next) {
+  req.session.numberOfVisits = req.session.numberOfVisits +1 || 1;
+  res.send("Visits: " + req.session.numberOfVisits);
+});
 
 /*
 User = require('./models/user').User;
